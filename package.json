@@ -1,0 +1,14 @@
+{
+  "name": "cotizador-hugo-zarate",
+  "version": "1.0.0",
+  "description": "Aplicación web de cotizaciones para Hugo Zárate Publicidad",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1",
+    "mongodb": "^6.5.0"
+  }
+}

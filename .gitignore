@@ -1,0 +1,39 @@
+# Dependencias
+node_modules/
+jspm_packages/
+web_modules/
+
+# Archivos de registro y depuración
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Entorno local / API Keys
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Archivos del Sistema Operativo
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# Archivos de edición / Scratch
+scratch/guia_page_*.jpg
+scratch/extracted_page_*.jpg
+scratch/extract_guia_images.js
+scratch/extract_guia.js
+scratch/search_pdf.js
+scratch/inspect_guia_bytes.js
+scratch/check_syntax.js
+scratch/inspect_db.js
+scratch/search_app_js.js
+
+# Subidas locales (opcional: si deseas no subir imágenes de prueba a GitHub)
+# public/uploads/*
+# !public/uploads/.gitkeep

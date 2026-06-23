@@ -1,0 +1,678 @@
+[
+  {
+    "client": "CDA DISTRITAL",
+    "requestor": "JHONATAN",
+    "date": "2026-03-01",
+    "paymentTerms": "30 DIAS",
+    "deliveryTime": "3 DIAS",
+    "deliveryPlace": "Bogotá",
+    "observations": "Ninguna",
+    "agent": "Hugo Zárate",
+    "agentRole": "Gerente General",
+    "agentPhone": "314 330 09 13",
+    "items": [
+      {
+        "description": "REF.:AVISO BASTIDOR\n\nTAMAÑO 330 X 90 CMS\nINSTALACIÓN A 5 MTRS",
+        "quantity": 1,
+        "unitPrice": 720000,
+        "imageUrl": ""
+      },
+      {
+        "description": "INSTALACION : 2 PROFESIONALES\nCON ALTURAS Y ANDAMIOS",
+        "quantity": 1,
+        "unitPrice": 600000,
+        "imageUrl": ""
+      }
+    ],
+    "subtotal": 1320000,
+    "iva": 250800,
+    "total": 1570800,
+    "gallery": [],
+    "number": 1029,
+    "id": 1029,
+    "createdAt": "2026-06-10T15:39:35.221Z"
+  },
+  {
+    "client": "SEGUROS MUNDIAL",
+    "requestor": "MILENA CORDERO",
+    "date": "2026-06-10",
+    "paymentTerms": "15 DIAS",
+    "deliveryTime": "1 DIA",
+    "deliveryPlace": "Bogotá",
+    "observations": "ENTREGAR EN CORFERIAS",
+    "agent": "Marilyn Salinas",
+    "agentRole": "Gerente Comercial",
+    "agentPhone": "318 770 96 81",
+    "items": [
+      {
+        "description": "PORTAPENDON ROLL UO",
+        "quantity": 1,
+        "unitPrice": 250000,
+        "imageUrl": "/uploads/visual-1781123445569-121700506.jpeg"
+      },
+      {
+        "description": "MUG SUBLIMADO",
+        "quantity": 400,
+        "unitPrice": 15000,
+        "imageUrl": "/uploads/visual-1781123603517-974984721.png"
+      }
+    ],
+    "subtotal": 6250000,
+    "iva": 1187500,
+    "total": 7437500,
+    "gallery": [],
+    "id": 1030,
+    "number": 1030,
+    "createdAt": "2026-06-10T20:34:25.275Z",
+    "updatedAt": "2026-06-10T20:36:18.947Z"
+  },
+  {
+    "client": "TECHNIPETROL SAS",
+    "requestor": "NIDIA RODRIGUEZ",
+    "date": "2026-06-10",
+    "paymentTerms": "30 DIAS",
+    "deliveryTime": "3 DIAS",
+    "deliveryPlace": "Bogotá",
+    "observations": "",
+    "agent": "Marilyn Salinas",
+    "agentRole": "Gerente Comercial",
+    "agentPhone": "318 770 96 81",
+    "items": [
+      {
+        "description": "SEÑALETICA DE 70 CM DE ALTO X 100 CM, ELABOARADA EN POLIESTIRENO CALIBRE 60, IMPRESION EN ALTA RESOLUCION, EN VINILO LAMINADO, CON CINTA DOBLE FAZ AL RESPALDO PARA FACIL INSTALACIÓN.",
+        "quantity": 20,
+        "unitPrice": 95000,
+        "imageUrl": "/uploads/visual-1781128710964-898573520.png",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "BUZON DE SUGERENCIAS MEDIDAS 25X16X30 CM",
+        "quantity": 1,
+        "unitPrice": 180000,
+        "imageUrl": "/uploads/visual-1781129289776-320105579.png",
+        "imageWidth": 80,
+        "imageHeight": 80
+      }
+    ],
+    "subtotal": 2080000,
+    "iva": 395200,
+    "total": 2475200,
+    "gallery": [
+      {
+        "url": "/uploads/visual-1781128728967-494643384.png",
+        "width": 110,
+        "height": 110
+      }
+    ],
+    "number": 149,
+    "id": 149,
+    "createdAt": "2026-06-10T22:08:16.207Z"
+  },
+  {
+    "client": "SEGUROS MUNDIAL",
+    "requestor": "MARGEE JULIET MOCHA",
+    "date": "2026-06-10",
+    "paymentTerms": "30 DIAS",
+    "deliveryTime": "3 DIAS",
+    "deliveryPlace": "Bogotá",
+    "observations": "",
+    "agent": "Hugo Zárate",
+    "agentRole": "Gerente General",
+    "agentPhone": "314 330 09 13",
+    "items": [
+      {
+        "description": "pocillos tamaño   11 oz, SUBLIMADOS CON LOGOTIPO SEGUN DISEÑO SUMINISTRADO",
+        "quantity": 400,
+        "unitPrice": 8000,
+        "imageUrl": "/uploads/visual-1781130612032-970998927.png",
+        "imageWidth": 80,
+        "imageHeight": 80
+      }
+    ],
+    "subtotal": 3200000,
+    "iva": 608000,
+    "total": 3808000,
+    "gallery": [],
+    "number": 150,
+    "id": 150,
+    "createdAt": "2026-06-10T22:31:00.342Z"
+  },
+  {
+    "client": "QUIERO UN EVENTO",
+    "requestor": "ANGELA",
+    "date": "2026-06-10",
+    "paymentTerms": "30 DIAS",
+    "deliveryTime": "3 DIAS",
+    "deliveryPlace": "Bogotá",
+    "observations": "",
+    "agent": "Marilyn Salinas",
+    "agentRole": "Gerente Comercial",
+    "agentPhone": "318 770 96 81",
+    "items": [
+      {
+        "description": "PAPEL DE 125X83 CM",
+        "quantity": 1,
+        "unitPrice": 20000,
+        "imageUrl": "",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "MASCAR CORTE LASER",
+        "quantity": 100,
+        "unitPrice": 1000,
+        "imageUrl": "",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "DINOSAURIOS 125X150",
+        "quantity": 2,
+        "unitPrice": 165000,
+        "imageUrl": "",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "PUERTA EN CARTON DOBLE PARED, EN CUBOS VOLUMETRICOS .",
+        "quantity": 1,
+        "unitPrice": 870000,
+        "imageUrl": "/uploads/visual-1781142722241-829321492.jpg",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "AVISOS EN MAULET",
+        "quantity": 12,
+        "unitPrice": 3000,
+        "imageUrl": "",
+        "imageWidth": 80,
+        "imageHeight": 80
+      }
+    ],
+    "subtotal": 1356000,
+    "iva": 257640,
+    "total": 1613640,
+    "gallery": [],
+    "id": 151,
+    "number": 151,
+    "createdAt": "2026-06-11T01:47:27.744Z",
+    "updatedAt": "2026-06-11T01:52:07.242Z"
+  },
+  {
+    "client": "SEGUROS MUNDIAL",
+    "requestor": "MARGEE JULIET MOCHA",
+    "date": "2026-06-11",
+    "paymentTerms": "30 DIAS",
+    "deliveryTime": "3 DIAS",
+    "deliveryPlace": "Bogotá",
+    "observations": "",
+    "agent": "Hugo Zárate",
+    "agentRole": "Gerente General",
+    "agentPhone": "314 330 09 13",
+    "items": [
+      {
+        "description": "MUG DE 11 ONZAS, SUBLIMADO SEGUN DISEÑO APROBADO",
+        "quantity": 400,
+        "unitPrice": 8000,
+        "imageUrl": "/uploads/visual-1781143775778-767155465.png",
+        "imageWidth": 80,
+        "imageHeight": 80
+      }
+    ],
+    "subtotal": 3200000,
+    "iva": 608000,
+    "total": 3808000,
+    "gallery": [
+      {
+        "url": "/uploads/visual-1781143831193-199348107.png",
+        "width": 110,
+        "height": 110
+      }
+    ],
+    "number": 152,
+    "id": 152,
+    "createdAt": "2026-06-11T02:10:35.033Z"
+  },
+  {
+    "client": "QUIERO UN EVENTO",
+    "requestor": "ANGELA TOVAR",
+    "date": "2026-06-11",
+    "paymentTerms": "30 DIAS",
+    "deliveryTime": "3 DIAS",
+    "deliveryPlace": "Bogotá",
+    "observations": "",
+    "agent": "Marilyn Salinas",
+    "agentRole": "Gerente Comercial",
+    "agentPhone": "318 770 96 81",
+    "items": [
+      {
+        "description": "TROPEZON EN CARTON DE 125X120 CM",
+        "quantity": 1,
+        "unitPrice": 120000,
+        "imageUrl": "/uploads/visual-1781205189305-287384279.jpg",
+        "imageWidth": 80,
+        "imageHeight": 80
+      }
+    ],
+    "subtotal": 120000,
+    "iva": 22800,
+    "total": 142800,
+    "gallery": [
+      {
+        "url": "/uploads/visual-1781205211661-914630001.png",
+        "width": 110,
+        "height": 110
+      }
+    ],
+    "number": 153,
+    "id": 153,
+    "createdAt": "2026-06-11T19:13:35.774Z"
+  },
+  {
+    "client": "QUIERO UN EVENTO",
+    "requestor": "ANGELA TOVAR",
+    "date": "2026-06-11",
+    "paymentTerms": "30 DIAS",
+    "deliveryTime": "3 DIAS",
+    "deliveryPlace": "Bogotá",
+    "observations": "",
+    "agent": "Marilyn Salinas",
+    "agentRole": "Gerente Comercial",
+    "agentPhone": "318 770 96 81",
+    "items": [
+      {
+        "description": "BANNER 200X200",
+        "quantity": 1,
+        "unitPrice": 200000,
+        "imageUrl": "/uploads/visual-1781206219938-499371277.png",
+        "imageWidth": 80,
+        "imageHeight": 80
+      }
+    ],
+    "subtotal": 200000,
+    "iva": 38000,
+    "total": 238000,
+    "gallery": [],
+    "number": 154,
+    "id": 154,
+    "createdAt": "2026-06-11T19:30:24.980Z"
+  },
+  {
+    "client": "SEGUROS MUNDIAL",
+    "requestor": "MARGEE JULIET MOCHA",
+    "date": "2026-06-11",
+    "paymentTerms": "30 DIAS",
+    "deliveryTime": "3 DIAS",
+    "deliveryPlace": "Bogotá",
+    "observations": "",
+    "agent": "Marilyn Salinas",
+    "agentRole": "Gerente Comercial",
+    "agentPhone": "318 770 96 81",
+    "items": [
+      {
+        "description": "MUGS 11 ONZAS, SUBLIMADO SEGUN ARTE SUMINISTRADO",
+        "quantity": 1,
+        "unitPrice": 8000,
+        "imageUrl": "/uploads/visual-1781206847683-998946594.png",
+        "imageWidth": 80,
+        "imageHeight": 80
+      }
+    ],
+    "subtotal": 8000,
+    "iva": 1520,
+    "total": 9520,
+    "gallery": [],
+    "number": 155,
+    "id": 155,
+    "createdAt": "2026-06-11T19:42:21.364Z"
+  },
+  {
+    "client": "SEGUROS MUNDIAL",
+    "requestor": "MARGEE JULIET MOCHA",
+    "date": "2026-06-12",
+    "paymentTerms": "30 DIAS",
+    "deliveryTime": "8 DIAS",
+    "deliveryPlace": "Bogotá",
+    "observations": "",
+    "agent": "Hugo Zárate",
+    "agentRole": "Gerente General",
+    "agentPhone": "314 330 09 13",
+    "items": [
+      {
+        "description": "MUG DE 11 OZAS SUBLIMADO SEGUN ARTE SUMINISTRADO",
+        "quantity": 400,
+        "unitPrice": 8000,
+        "imageUrl": "/uploads/visual-1781288377812-277528956.png",
+        "imageWidth": 80,
+        "imageHeight": 80
+      }
+    ],
+    "subtotal": 3200000,
+    "iva": 608000,
+    "total": 3808000,
+    "gallery": [],
+    "id": 156,
+    "number": 156,
+    "createdAt": "2026-06-12T18:19:43.992Z",
+    "updatedAt": "2026-06-12T18:30:07.280Z"
+  },
+  {
+    "client": "SEGUROS MUNDIAL",
+    "requestor": "MARGEE JULIET MOCHA",
+    "date": "2026-06-12",
+    "paymentTerms": "30 DIAS",
+    "deliveryTime": "8 DIAS",
+    "deliveryPlace": "Bogotá",
+    "observations": "",
+    "agent": "Hugo Zárate",
+    "agentRole": "Gerente General",
+    "agentPhone": "314 330 09 13",
+    "items": [
+      {
+        "description": "MUG DE 11 ONZAS SUBLIMADO SEGUN ARTE SUMINISTRADA, ADJUNTO MUESTRA VISUAL.",
+        "quantity": 400,
+        "unitPrice": 8000,
+        "imageUrl": "/uploads/visual-1781288607917-774691166.png",
+        "imageWidth": 80,
+        "imageHeight": 80
+      }
+    ],
+    "subtotal": 3200000,
+    "iva": 608000,
+    "total": 3808000,
+    "gallery": [],
+    "id": 157,
+    "number": 157,
+    "createdAt": "2026-06-12T18:23:31.400Z",
+    "updatedAt": "2026-06-12T18:30:43.864Z"
+  },
+  {
+    "client": "SEGUROS MUNDIAL",
+    "requestor": "MARGEE JULIET MOCHA",
+    "date": "2026-06-12",
+    "paymentTerms": "30 DIAS",
+    "deliveryTime": "3 DIAS",
+    "deliveryPlace": "Bogotá",
+    "observations": "50% ANTICIPO 50% CONTRAENTREGA",
+    "agent": "Hugo Zárate",
+    "agentRole": "Gerente General",
+    "agentPhone": "314 330 09 13",
+    "items": [
+      {
+        "description": "MUGS DE 11 ONZAS SUBLIMADO SEGUN ARTE, ADJUNTO MUESTRA VISUAL",
+        "quantity": 400,
+        "unitPrice": 8000,
+        "imageUrl": "/uploads/visual-1781289526087-994437277.png",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "BANDERA",
+        "quantity": 1,
+        "unitPrice": 50000,
+        "imageUrl": "/uploads/visual-1781368693583-27568218.jpg",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "LASER",
+        "quantity": 1,
+        "unitPrice": 10000,
+        "imageUrl": "/uploads/visual-1781368718104-705391857.jpg",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "LAMINA EN POLIESTIRENO",
+        "quantity": 1,
+        "unitPrice": 50000,
+        "imageUrl": "/uploads/visual-1781368735199-318416765.jpg",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "BASTIDOR",
+        "quantity": 1,
+        "unitPrice": 10000,
+        "imageUrl": "/uploads/visual-1781368753911-387490365.jpg",
+        "imageWidth": 80,
+        "imageHeight": 80
+      }
+    ],
+    "subtotal": 3320000,
+    "iva": 630800,
+    "total": 3950800,
+    "gallery": [
+      {
+        "url": "/uploads/visual-1781369729765-253706016.jpg",
+        "width": 110,
+        "height": 110
+      }
+    ],
+    "id": 158,
+    "number": 158,
+    "createdAt": "2026-06-12T18:38:50.354Z",
+    "updatedAt": "2026-06-13T18:50:16.339Z"
+  },
+  {
+    "client": "QUIERO UN EVENTO",
+    "requestor": "ANGELA TOVAR",
+    "date": "2026-06-13",
+    "paymentTerms": "30 DIAS",
+    "deliveryTime": "3 DIAS",
+    "deliveryPlace": "Bogotá",
+    "observations": "",
+    "agent": "Hugo Zárate",
+    "agentRole": "Gerente General",
+    "agentPhone": "314 330 09 13",
+    "items": [
+      {
+        "description": "CARTON 3D FIESTA TEMATICA DINOS",
+        "quantity": 1,
+        "unitPrice": 850000,
+        "imageUrl": "/uploads/visual-1781368452231-371132421.png",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "FGF",
+        "quantity": 1,
+        "unitPrice": 5000,
+        "imageUrl": "/uploads/visual-1781375451448-182463849.jpg",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "FDGGG",
+        "quantity": 1,
+        "unitPrice": 5000,
+        "imageUrl": "/uploads/visual-1781375465940-30131201.jpg",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "MUG",
+        "quantity": 1,
+        "unitPrice": 8000,
+        "imageUrl": "/uploads/visual-1781375483726-780350454.jpg",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "LASER",
+        "quantity": 1,
+        "unitPrice": 5000,
+        "imageUrl": "/uploads/visual-1781375498915-325959852.jpg",
+        "imageWidth": 80,
+        "imageHeight": 80
+      }
+    ],
+    "subtotal": 873000,
+    "iva": 165870,
+    "total": 1038870,
+    "gallery": [
+      {
+        "url": "/uploads/visual-1781368468708-540432793.png",
+        "width": 110,
+        "height": 110
+      }
+    ],
+    "id": 159,
+    "number": 159,
+    "createdAt": "2026-06-13T16:35:51.253Z",
+    "updatedAt": "2026-06-13T18:31:47.455Z"
+  },
+  {
+    "client": "SEGUROS MUNDIAL",
+    "requestor": "MILENA CORDERO",
+    "date": "2026-06-13",
+    "paymentTerms": "30 DIAS",
+    "deliveryTime": "3 DIAS",
+    "deliveryPlace": "Bogotá",
+    "observations": "",
+    "agent": "Marilyn Salinas",
+    "agentRole": "Gerente Comercial",
+    "agentPhone": "318 770 96 81",
+    "items": [
+      {
+        "description": "COBIJAS",
+        "quantity": 1,
+        "unitPrice": 150000,
+        "imageUrl": "/uploads/visual-1781377620429-971072127.png",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "LASER",
+        "quantity": 1,
+        "unitPrice": 10000,
+        "imageUrl": "/uploads/visual-1781377668751-488933947.png",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "BANNER",
+        "quantity": 1,
+        "unitPrice": 70000,
+        "imageUrl": "",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "PENDON",
+        "quantity": 1,
+        "unitPrice": 85000,
+        "imageUrl": "",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "SADHGSAJHDG",
+        "quantity": 1,
+        "unitPrice": 0,
+        "imageUrl": "/uploads/visual-1781377741424-536076906.png",
+        "imageWidth": 80,
+        "imageHeight": 80
+      }
+    ],
+    "subtotal": 315000,
+    "iva": 59850,
+    "total": 374850,
+    "gallery": [
+      {
+        "url": "/uploads/visual-1781377759905-118851536.png",
+        "width": 110,
+        "height": 110
+      }
+    ],
+    "number": 160,
+    "id": 160,
+    "createdAt": "2026-06-13T19:09:30.394Z"
+  },
+  {
+    "client": "SEGUROS MUNDIAL",
+    "requestor": "ANGELA TOVAR",
+    "date": "2026-06-13",
+    "paymentTerms": "30 DIAS",
+    "deliveryTime": "3 DIAS",
+    "deliveryPlace": "Bogotá",
+    "observations": "",
+    "agent": "Marilyn Salinas",
+    "agentRole": "Gerente Comercial",
+    "agentPhone": "318 770 96 81",
+    "items": [
+      {
+        "description": "A",
+        "quantity": 1,
+        "unitPrice": 5000,
+        "imageUrl": "/uploads/visual-1781382856236-492591390.png",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "CARRO",
+        "quantity": 1,
+        "unitPrice": 80000,
+        "imageUrl": "/uploads/visual-1781382881850-237010780.png",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "DDD",
+        "quantity": 1,
+        "unitPrice": 1000000,
+        "imageUrl": "/uploads/visual-1781382909248-972375726.png",
+        "imageWidth": 80,
+        "imageHeight": 80
+      },
+      {
+        "description": "PENDON",
+        "quantity": 1,
+        "unitPrice": 250000,
+        "imageUrl": "",
+        "imageWidth": 80,
+        "imageHeight": 80
+      }
+    ],
+    "subtotal": 1335000,
+    "iva": 253650,
+    "total": 1588650,
+    "gallery": [],
+    "id": 161,
+    "number": 161,
+    "createdAt": "2026-06-13T20:35:12.747Z",
+    "updatedAt": "2026-06-13T20:36:11.444Z"
+  },
+  {
+    "client": "SEGUROS MUNDIAL",
+    "requestor": "MILENA CORDERO",
+    "date": "2026-06-13",
+    "paymentTerms": "30 DIAS",
+    "deliveryTime": "3 DIAS",
+    "deliveryPlace": "Bogotá",
+    "observations": "",
+    "agent": "Marilyn Salinas",
+    "agentRole": "Gerente Comercial",
+    "agentPhone": "318 770 96 81",
+    "items": [
+      {
+        "description": "dsd",
+        "quantity": 1,
+        "unitPrice": 80000,
+        "imageUrl": "/uploads/visual-1781387242948-373376934.png",
+        "imageWidth": 80,
+        "imageHeight": 58
+      }
+    ],
+    "subtotal": 80000,
+    "iva": 15200,
+    "total": 95200,
+    "gallery": [],
+    "id": 162,
+    "number": 162,
+    "createdAt": "2026-06-13T21:48:32.022Z",
+    "updatedAt": "2026-06-13T21:48:47.927Z"
+  }
+]

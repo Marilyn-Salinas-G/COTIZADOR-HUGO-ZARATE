@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cotizador - Hugo Zárate Publicidad</title>
+  <!-- Google Fonts: Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <!-- PDF Generation: html2canvas (render) + jsPDF (assemble) - explicit multi-page control -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- Dashboard Container -->
+  <div class="app-container">
+    
+    <!-- Sidebar / Top Navigation Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <img src="logo.png" alt="Hugo Zárate Publicidad" id="header-logo-img">
+        <div class="brand-info">
+          <h1>Hugo Zárate Publicidad</h1>
+          <p class="slogan">Agente Cotizador</p>
+        </div>
+      </div>
+      
+      <nav class="tab-navigation">
+        <button class="nav-btn active" id="tab-new-btn" onclick="switchTab('new')">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          Nueva Cotización
+        </button>
+        <button class="nav-btn" id="tab-history-btn" onclick="switchTab('history')">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          Historial / Buscar
+        </button>
+      </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="app-content">
+      
+      <!-- Tab 1: Nueva Cotización -->
+      <section id="tab-new" class="tab-panel active">
+        <div class="card form-card">
+          <div class="card-header">
+            <h2 id="form-title">Generar Nueva Cotización</h2>
+            <div class="consecutivo-badge">
+              Cotización Nº: <span id="current-consecutivo-display">Cargando...</span>
+            </div>
+          </div>
+          
+          <form id="quote-form" onsubmit="handleFormSubmit(event)">
+            <input type="hidden" id="edit-quote-id" value="">
+            
+            <!-- Metadata Row -->
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="client-name">Cliente / Razón Social <span class="required">*</span></label>
+                <input type="text" id="client-name" placeholder="Ej. CDA DISTRITAL" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="requestor-name">Solicitado por <span class="required">*</span></label>
+                <input type="text" id="requestor-name" placeholder="Ej. JHONATAN" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="quote-date">Fecha de Cotización</label>
+                <input type="date" id="quote-date">
+              </div>
+              
+              <div class="form-group">
+                <label for="quote-agent">Agente que Cotiza</label>
+                <select id="quote-agent" onchange="handleAgentChange()">
+                  <option value="Marilyn Salinas" data-role="Gerente Comercial" data-phone="318 770 96 81">Marilyn Salinas (Gerente Comercial)</option>
+                  <option value="Hugo Zárate" data-role="Gerente General" data-phone="314 330 09 13">Hugo Zárate (Gerente General)</option>
+                  <option value="Otro">Otro / Personalizado</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Custom Agent Info (shown if 'Otro' is selected) -->
+            <div id="custom-agent-fields" class="form-grid hidden">
+              <div class="form-group">
+                <label for="custom-agent-name">Nombre del Agente</label>
+                <input type="text" id="custom-agent-name" placeholder="Ej. Juan Pérez">
+              </div>
+              <div class="form-group">
+                <label for="custom-agent-role">Cargo</label>
+                <input type="text" id="custom-agent-role" placeholder="Ej. Ejecutivo de Cuentas">
+              </div>
+              <div class="form-group">
+                <label for="custom-agent-phone">Teléfono</label>
+                <input type="text" id="custom-agent-phone" placeholder="Ej. 310 123 45 67">
+              </div>
+            </div>
+
+            <!-- Variable Terms Section -->
+            <h3 class="section-title">Condiciones Comerciales (Variables)</h3>
+            <div class="form-grid terms-grid">
+              <div class="form-group">
+                <label for="payment-terms">Forma de Pago</label>
+                <input type="text" id="payment-terms" placeholder="Ej. 30 DIAS, 50% anticipo y 50% contraentrega" value="30 DIAS">
+              </div>
+              <div class="form-group">
+                <label for="delivery-time">Tiempo de Entrega</label>
+                <input type="text" id="delivery-time" placeholder="Ej. 3 DIAS HÁBILES, 8 días hábiles" value="3 DIAS">
+              </div>
+              <div class="form-group">
+                <label for="delivery-place">Lugar de Entrega</label>
+                <input type="text" id="delivery-place" placeholder="Ej. En instalaciones del cliente, Bogotá" value="Bogotá">
+              </div>
+            </div>
+
+            <!-- Table of Items -->
+            <h3 class="section-title">Cuerpo de la Cotización (Artículos)</h3>
+            <div class="table-responsive">
+              <table class="items-table" id="items-table">
+                <thead>
+                  <tr>
+                    <th style="width: 50%;">Descripción del Artículo <span class="required">*</span></th>
+                    <th style="width: 10%;">Cant. <span class="required">*</span></th>
+                    <th style="width: 15%;">Precio Unit. ($) <span class="required">*</span></th>
+                    <th style="width: 15%;">Total ($)</th>
+                    <th style="width: 10%;">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="items-tbody">
+                  <!-- Rows added dynamically -->
+                </tbody>
+              </table>
+            </div>
+
+            <button type="button" class="btn btn-secondary add-item-btn" onclick="addTableRow()">
+              <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+              Agregar Artículo
+            </button>
+
+            <!-- Totals Card -->
+            <div class="totals-container">
+              <div class="totals-row">
+                <span class="label">Subtotal:</span>
+                <span class="value" id="subtotal-val">$ 0</span>
+              </div>
+              <div class="totals-row">
+                <span class="label">IVA (19%):</span>
+                <span class="value" id="iva-val">$ 0</span>
+              </div>
+              <div class="totals-row total-grand">
+                <span class="label">Total:</span>
+                <span class="value" id="total-val">$ 0</span>
+              </div>
+            </div>
+
+            <!-- Observations Section -->
+            <div class="form-group full-width">
+              <label for="observations">Observaciones</label>
+              <textarea id="observations" rows="3" placeholder="Ej. Condiciones especiales del trabajo, especificaciones técnicas adicionales..."></textarea>
+            </div>
+
+            <!-- General Visual Samples (Anexos) -->
+            <h3 class="section-title">Galería de Muestras / Anexos Generales (Opcional)</h3>
+            <div class="drag-drop-area" id="gallery-drop-area" onclick="triggerGalleryInput()">
+              <svg class="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+              <p>Arrastra y suelta imágenes de referencia aquí o <span>haz clic para buscar</span></p>
+              <input type="file" id="gallery-file-input" class="hidden" multiple accept="image/*" onchange="handleGalleryUpload(event)">
+            </div>
+            
+            <div class="gallery-preview-container" id="gallery-preview-container">
+              <!-- Visual samples thumbnails will render here -->
+            </div>
+
+            <!-- Submit and PDF Actions -->
+            <div class="form-actions">
+              <button type="button" class="btn btn-danger hidden" id="cancel-edit-btn" onclick="cancelEditMode()">
+                Cancelar Edición
+              </button>
+              <button type="submit" class="btn btn-primary" id="save-btn">
+                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+                Guardar Cotización
+              </button>
+              <button type="button" class="btn btn-success" id="export-pdf-btn" onclick="exportCurrentQuoteToPDF()">
+                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                Exportar a PDF
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Tab 2: Historial de Cotizaciones -->
+      <section id="tab-history" class="tab-panel">
+        <div class="card history-card">
+          <div class="card-header">
+            <h2>Historial de Cotizaciones</h2>
+            <div class="search-box">
+              <input type="text" id="search-input" placeholder="Buscar por cliente, cotizante, número..." oninput="filterQuotes()">
+              <button class="search-btn">
+                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              </button>
+            </div>
+          </div>
+          
+          <div class="table-responsive">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>Nº</th>
+                  <th>Cliente</th>
+                  <th>Solicitado por</th>
+                  <th>Fecha</th>
+                  <th>Agente</th>
+                  <th>Total ($)</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="history-tbody">
+                <!-- Loaded dynamically -->
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="empty-state" id="history-empty-state">
+            <svg class="empty-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0V9a2 2 0 00-2-2H6a2 2 0 00-2 2v4.5m15 3.5l-5-5m0 0l-3 3m3-3V17"></path></svg>
+            <p>No se encontraron cotizaciones guardadas.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- HIDDEN PRINT TEMPLATE FOR PDF GENERATION  -->
+  <!-- ========================================== -->
+  <div style="display: none;">
+    <div id="print-template">
+      
+      <!-- Page 1: Core Quotation Sheet -->
+      <div class="pdf-page" id="pdf-page-1">
+        <!-- Top Header Banner -->
+        <div class="pdf-header-banner">
+          <img src="header_banner.png" alt="Encabezado de Cotización">
+        </div>
+
+        <!-- Document Title & Consecutivo -->
+        <div class="pdf-document-title-row">
+          <div class="pdf-title-centered-container">
+            <img src="palabra_cotizacion.png" class="pdf-word-cotizacion" alt="Cotización">
+            <div class="pdf-document-number-badge">N° <span id="pdf-number">057</span></div>
+          </div>
+        </div>
+
+        <!-- Client & Date block -->
+        <div class="pdf-meta-table">
+          <div class="meta-row">
+            <div class="meta-cell label-cell cell-orange">Para:</div>
+            <div class="meta-cell value-cell bold-text" id="pdf-client">CDA DISTRITAL</div>
+            <div class="meta-cell label-cell cell-orange">Fecha:</div>
+            <div class="meta-cell value-cell" id="pdf-date">01 de MARZO 2026</div>
+          </div>
+          <div class="meta-row">
+            <div class="meta-cell label-cell colspan-2 cell-orange-light">SOLICITADO POR:</div>
+            <div class="meta-cell value-cell colspan-2 bold-text" id="pdf-requestor">JHONATAN</div>
+          </div>
+        </div>
+
+        <!-- Intro Text -->
+        <p class="pdf-intro-text">
+          Muy gentilmente nos permitimos cotizar el siguiente trabajo por usted solicitado:
+        </p>
+
+        <!-- Items Table -->
+        <table class="pdf-items-table">
+          <thead>
+            <tr>
+              <th class="cell-orange text-left" style="width: 55%;">ARTÍCULO:</th>
+              <th class="cell-orange text-center" style="width: 10%;">CANTIDAD</th>
+              <th class="cell-orange text-right" style="width: 17%;">VALOR UNITARIO:</th>
+              <th class="cell-orange text-right" style="width: 18%;">VALOR TOTAL</th>
+            </tr>
+          </thead>
+          <tbody id="pdf-items-tbody">
+            <!-- Populated dynamically -->
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2" class="noborder"></td>
+              <td class="text-right bold-text border-bottom bg-light">SUB - TOTAL</td>
+              <td class="text-right bold-text border-bottom" id="pdf-subtotal">$ 1.320.000</td>
+            </tr>
+            <tr>
+              <td colspan="2" class="noborder"></td>
+              <td class="text-right bold-text border-bottom bg-light">IVA</td>
+              <td class="text-right bold-text border-bottom" id="pdf-iva">$ 250.800</td>
+            </tr>
+            <tr>
+              <td colspan="2" class="noborder"></td>
+              <td class="text-right bold-text border-bottom bg-light font-large">TOTAL</td>
+              <td class="text-right bold-text border-bottom font-large text-orange" id="pdf-total">$ 1.570.800</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <!-- Flex spacer: pushes footer section (obs+signature+banks) toward the bottom of the page -->
+        <div class="pdf-flex-spacer"></div>
+
+        <!-- Bottom Layout Container (Observations and Signature) -->
+        <div class="pdf-footer-layout">
+          <!-- Left Side: Observations, Commercial terms & Banks -->
+          <div class="pdf-footer-left">
+            <div class="pdf-section-title-bar">OBSERVACIONES:</div>
+            <div class="pdf-observations-content" id="pdf-observations">
+              Ninguna
+            </div>
+            
+            <div class="pdf-terms-and-accounts-row">
+              <div class="pdf-terms">
+                <p><strong>FORMA DE PAGO:</strong> <span id="pdf-payment-terms">30 DIAS</span></p>
+                <p><strong>TIEMPO DE ENTREGA:</strong> <span id="pdf-delivery-time">3 DIAS</span></p>
+                <p><strong>LUGAR DE ENTREGA:</strong> <span id="pdf-delivery-place">En instalaciones</span></p>
+              </div>
+              
+              <!-- Accounts & QR row -->
+              <div class="pdf-accounts-qr-row">
+                <div class="pdf-banks-two-columns">
+                  <!-- Column 1 (Bancolombia first, Bogotá, Davivienda) -->
+                  <div class="bank-col">
+                    <!-- Bancolombia -->
+                    <div class="account-item">
+                      <img src="logo_bancolombia.jpg" class="bank-logo-img" alt="Bancolombia">
+                      <div class="bank-info-col">
+                        <span class="bank-name">Bancolombia</span>
+                        <span class="account-number">231 800 22 899</span>
+                      </div>
+                    </div>
+                    <!-- Banco de Bogotá -->
+                    <div class="account-item">
+                      <img src="logo_bogota.jfif" class="bank-logo-img" alt="Banco de Bogotá">
+                      <div class="bank-info-col">
+                        <span class="bank-name">Banco de Bogotá</span>
+                        <span class="account-number">057 33 10 68</span>
+                      </div>
+                    </div>
+                    <!-- Davivienda -->
+                    <div class="account-item">
+                      <img src="logo_davivienda.png" class="bank-logo-img" alt="Davivienda">
+                      <div class="bank-info-col">
+                        <span class="bank-name">Davivienda</span>
+                        <span class="account-number">488 426 172 901</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Column 2 (Nequi, Breve) -->
+                  <div class="bank-col">
+                    <!-- Nequi -->
+                    <div class="account-item">
+                      <img src="logo_nequi.png" class="bank-logo-img" alt="Nequi">
+                      <div class="bank-info-col">
+                        <span class="bank-name">NEQUI</span>
+                        <span class="account-number">314 330 09 13</span>
+                      </div>
+                    </div>
+                    <!-- Breve -->
+                    <div class="account-item">
+                      <img src="logo_breve.png" class="bank-logo-img" alt="Breve">
+                      <div class="bank-info-col">
+                        <span class="bank-name">BRE-B</span>
+                        <span class="account-number">@zarate613</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="pdf-qr-box">
+                  <div class="qr-code-wrapper">
+                    <img src="qr_hugo_zarate.png" alt="QR Hugo Zárate" id="pdf-qr-img" style="width: 100%; height: 100%; object-fit: contain;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Side: Signature Block only -->
+          <div class="pdf-footer-right">
+            <!-- Agent and Signature Block -->
+            <div class="pdf-agent-signature-container">
+              <div class="pdf-section-title-bar bg-orange text-center">COTIZADO POR:</div>
+              <div class="pdf-signature-area">
+                <div class="signature-stamp">
+                  <img src="signature.png" alt="Firma Hugo Zárate" id="pdf-signature-img">
+                </div>
+                <div class="agent-details">
+                  <strong id="pdf-agent-name">HUGO ZÁRATE PUBLICIDAD</strong><br>
+                  <span id="pdf-agent-role">REGIMEN COMUN</span><br>
+                  <span>NIT. <span id="pdf-nit-display">79836613-0</span></span><br>
+                  <span id="pdf-agent-phone">REGIMEN COMUN</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Orange Footer Bar - in document flow, always shows after content -->
+        <footer class="pdf-footer-bar">
+          Cra. 28 No. 10 - 70 Local 401 Barrio Ricaurte - Bogotá - Colombia &nbsp;|&nbsp; Cel. 314 330 09 13 &nbsp;|&nbsp; Email: hugozaratepublicidad@hotmail.com
+        </footer>
+      </div>
+
+      <!-- Page 2: General Visual Samples (Anexos) -->
+      <div class="pdf-page pdf-page-break" id="pdf-page-2">
+        <!-- Gallery title header -->
+        <div class="pdf-gallery-page-header">
+          <img src="header_banner.png" alt="Encabezado" style="width: 816px; margin-left: -40px; margin-top: -40px; display: block;">
+          <div style="font-size: 14px; font-weight: 700; color: #f97316; text-align: center; padding: 10px 0 16px 0; border-bottom: 2px solid #f97316; margin-bottom: 16px;">MUESTRAS Y REFERENCIAS</div>
+        </div>
+        <div class="pdf-gallery-grid" id="pdf-gallery-grid">
+          <!-- Rendered dynamically -->
+        </div>
+        
+        <!-- Orange Footer Bar -->
+        <footer class="pdf-footer-bar">
+          Cra. 28 No. 10 - 70 Local 401 Barrio Ricaurte - Bogotá - Colombia &nbsp;|&nbsp; Cel. 314 330 09 13 &nbsp;|&nbsp; Email: hugozaratepublicidad@hotmail.com
+        </footer>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+  <!-- JS App Script -->
+  <script src="app.js"></script>
+</body>
+</html>
