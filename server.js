@@ -445,3 +445,6 @@ initDb().then(() => {
     console.log('==========================================================');
   });
 });
+
+// Export app for serverless environments (e.g. Vercel)
+module.exports = app;
