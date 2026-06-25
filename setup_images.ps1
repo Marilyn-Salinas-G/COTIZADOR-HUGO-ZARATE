@@ -87,6 +87,16 @@ if ($hugoQR) {
     Write-Warning "No se encontró el archivo del QR de Hugo Zárate."
 }
 
+# 5b. Optimizar Nequi
+$nequiFile = Get-ChildItem "$workspaceDir\*NEQUI*.png" | Select-Object -First 1
+if ($nequiFile) {
+    Write-Output "Optimizando logotipo de Nequi ($($nequiFile.Name))..."
+    Resize-Image -SourcePath $nequiFile.FullName -TargetPath "$publicDir\logo_nequi.png" -NewWidth 150
+} else {
+    Write-Warning "No se encontró el archivo de Nequi (*NEQUI*.png)."
+}
+
+
 # 6. Optimizar Encabezado de Cotización
 $headerFile = Get-ChildItem "$workspaceDir\*ENCABEZADO*.png" | Select-Object -First 1
 if ($headerFile) {

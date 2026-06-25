@@ -786,7 +786,7 @@ textarea:focus {
   width: 816px;        /* Letter width at 96 DPI */
   height: 1056px;      /* Letter height at 96 DPI - FIXED, JS controls content per page */
   background-color: #ffffff;
-  padding: 20px 40px 40px 40px; /* 40px bottom: 36px footer bar + 4px buffer */
+  padding: 12px 35px 35px 35px; /* Reduced padding to gain space */
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 13px;
@@ -807,7 +807,7 @@ textarea:focus {
 
 /* Header Banner - stretches edge-to-edge at the top of the container */
 .pdf-header-banner {
-  margin: -20px -40px 10px -40px; /* Counteracts the parent's padding */
+  margin: -12px -35px 6px -35px; /* Counteracts the parent's padding */
   width: 816px;
   height: auto;
   overflow: hidden;
@@ -826,8 +826,8 @@ textarea:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 8px;
-  padding: 0 10px 6px 10px;
+  margin-bottom: 4px;
+  padding: 0 10px 4px 10px;
   border-bottom: 3px solid #f97316; /* Accent line */
 }
 
@@ -839,7 +839,7 @@ textarea:focus {
 }
 
 .pdf-word-cotizacion {
-  height: 34px; /* Proportionate height for the word image */
+  height: 28px; /* Proportionate height for the word image - slightly smaller to gain space */
   width: auto;
   display: block;
 }
@@ -859,7 +859,7 @@ textarea:focus {
 .pdf-meta-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   font-size: 13px;
   border: 1.5px solid #a0aec0;
 }
@@ -874,7 +874,7 @@ textarea:focus {
 }
 
 .meta-cell {
-  padding: 4px 10px;
+  padding: 3px 10px;
   display: flex;
   align-items: center;
 }
@@ -923,7 +923,7 @@ textarea:focus {
 
 .pdf-intro-text {
   font-size: 13px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   color: #2d3748;
 }
 
@@ -939,13 +939,13 @@ textarea:focus {
 .pdf-items-table th {
   color: #ffffff;
   font-weight: 700;
-  padding: 5px 10px;
+  padding: 4px 8px;
   font-size: 12px;
   border: 1.5px solid #a0aec0;
 }
 
 .pdf-items-table td {
-  padding: 5px 10px;
+  padding: 4px 8px;
   border-right: 1.5px solid #a0aec0;
   border-bottom: 1px solid #cbd5e0;
   color: #2d3748;
@@ -1179,6 +1179,7 @@ textarea:focus {
   width: auto;
   max-width: 24px;
   object-fit: contain;
+  aspect-ratio: auto;
   flex-shrink: 0;
   display: block;
 }
@@ -1186,16 +1187,28 @@ textarea:focus {
 .bank-name {
   font-weight: 700;
   color: #2d3748;
-  font-size: 8px;
+  font-size: 7px;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.acc-type {
+  font-size: 5.5px;
+  font-weight: 500;
+  color: #718096;
+  text-transform: uppercase;
+  margin-left: 3px;
+  border-left: 1px solid #cbd5e0;
+  padding-left: 3px;
 }
 
 .account-number {
   font-family: Arial, sans-serif;
-  font-size: 9.5px;
+  font-size: 8.5px;
   font-weight: 700;
   color: #1a202c;
-  letter-spacing: -0.1px;
+  letter-spacing: -0.2px;
 }
 
 .pdf-qr-box {

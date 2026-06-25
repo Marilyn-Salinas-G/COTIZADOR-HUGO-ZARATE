@@ -674,5 +674,136 @@
     "number": 162,
     "createdAt": "2026-06-13T21:48:32.022Z",
     "updatedAt": "2026-06-13T21:48:47.927Z"
+  },
+  {
+    "client": "SEGUROS MUNDIAL",
+    "requestor": "MILENA CORDERO",
+    "date": "2026-06-24",
+    "paymentTerms": "30 DIAS",
+    "deliveryTime": "3 DIAS",
+    "deliveryPlace": "Bogotá",
+    "observations": "",
+    "agent": "Hugo Zárate",
+    "agentRole": "Gerente General",
+    "agentPhone": "314 330 09 13",
+    "items": [
+      {
+        "description": "tarjeta falmingo",
+        "quantity": 5,
+        "unitPrice": 15000,
+        "imageUrl": "/uploads/visual-1782337226919-754332535.png",
+        "imageWidth": 80,
+        "imageHeight": 142
+      }
+    ],
+    "subtotal": 75000,
+    "iva": 14250,
+    "total": 89250,
+    "gallery": [],
+    "number": 163,
+    "id": 163,
+    "createdAt": "2026-06-24T21:40:53.540Z"
+  },
+  {
+    "client": "SEGUROS MUNDIAL",
+    "requestor": "MARGEE JULIET MOCHA",
+    "date": "2026-06-24",
+    "paymentTerms": "30 DIAS",
+    "deliveryTime": "3 DIAS",
+    "deliveryPlace": "Bogotá",
+    "observations": "",
+    "agent": "Santiago Zarate Salinas",
+    "agentRole": "Ejecutivo de Cuentas",
+    "agentPhone": "3142364348",
+    "items": [
+      {
+        "description": "pocllo",
+        "quantity": 2,
+        "unitPrice": 15000,
+        "imageUrl": "/uploads/visual-1782338205156-237099808.png",
+        "imageWidth": 80,
+        "imageHeight": 58
+      },
+      {
+        "description": "jdkjfkojdfk",
+        "quantity": 1,
+        "unitPrice": 70000,
+        "imageUrl": "/uploads/visual-1782338226757-729038630.jpeg",
+        "imageWidth": 80,
+        "imageHeight": 37
+      },
+      {
+        "description": "sjadhsaj",
+        "quantity": 1,
+        "unitPrice": 150000,
+        "imageUrl": "/uploads/visual-1782338242396-40594572.png",
+        "imageWidth": 80,
+        "imageHeight": 60
+      },
+      {
+        "description": "aviso",
+        "quantity": 6,
+        "unitPrice": 3500000,
+        "imageUrl": "/uploads/visual-1782338251857-770697295.png",
+        "imageWidth": 80,
+        "imageHeight": 56
+      },
+      {
+        "description": "hdhsajh",
+        "quantity": 1,
+        "unitPrice": 15800000,
+        "imageUrl": "/uploads/visual-1782338278967-695633884.png",
+        "imageWidth": 80,
+        "imageHeight": 45
+      },
+      {
+        "description": "huhuhu",
+        "quantity": 1,
+        "unitPrice": 9800000,
+        "imageUrl": "/uploads/visual-1782338302740-907078030.png",
+        "imageWidth": 80,
+        "imageHeight": 58
+      },
+      {
+        "description": "sahdsahjid",
+        "quantity": 50,
+        "unitPrice": 2000,
+        "imageUrl": "/uploads/visual-1782338323194-778573117.png",
+        "imageWidth": 80,
+        "imageHeight": 142
+      },
+      {
+        "description": "sdas",
+        "quantity": 5,
+        "unitPrice": 20000,
+        "imageUrl": "/uploads/visual-1782338342047-756280138.jpeg",
+        "imageWidth": 80,
+        "imageHeight": 37
+      },
+      {
+        "description": "dwdwq",
+        "quantity": 1,
+        "unitPrice": 85000,
+        "imageUrl": "/uploads/visual-1782338372973-827972250.png",
+        "imageWidth": 80,
+        "imageHeight": 60
+      },
+      {
+        "description": "tropezon",
+        "quantity": 1,
+        "unitPrice": 0,
+        "imageUrl": "/uploads/visual-1782338386675-752042850.jpg",
+        "imageWidth": 80,
+        "imageHeight": 58
+      }
+    ],
+    "subtotal": 47135000,
+    "iva": 8955650,
+    "total": 56090650,
+    "gallery": [],
+    "id": 164,
+    "number": 164,
+    "createdAt": "2026-06-24T22:00:00.284Z",
+    "updatedAt": "2026-06-25T20:40:48.936Z"
   }
 ]

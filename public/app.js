@@ -398,28 +398,14 @@ function optimizeAndUploadImage(file, callback) {
       const ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0, width, height);
       
-      // Convert canvas to blob
-      canvas.toBlob(blob => {
-        const formData = new FormData();
-        formData.append('image', blob, file.name);
-        
-        fetch('/api/upload', {
-          method: 'POST',
-          body: formData
-        })
-        .then(res => res.json())
-        .then(data => {
-          if (data.success) {
-            callback(null, data.url);
-          } else {
-            callback(data.error || 'Upload failed');
-          }
-        })
-        .catch(err => {
-          console.error("Upload error:", err);
-          callback(err);
-        });
-      }, 'image/jpeg', 0.85); // 85% JPEG quality
+      // Convert canvas directly to Base64 JPEG URL (85% quality)
+      try {
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+        callback(null, dataUrl);
+      } catch (err) {
+        console.error("Error converting image to Base64:", err);
+        callback(err);
+      }
     };
   };
 }
@@ -1013,43 +999,115 @@ async function generatePDF(quote) {
     const footerLayoutEl = page1.querySelector('.pdf-footer-layout');
     const titleRowEl = page1.querySelector('.pdf-document-title-row');
     const obsEl = page1.querySelector('.pdf-observations-content');
+    const headerBannerEl = page1.querySelector('.pdf-header-banner');
+    const introTextEl = page1.querySelector('.pdf-intro-text');
+    const stampEl = page1.querySelector('.signature-stamp');
+    const flexSpacer = page1.querySelector('.pdf-flex-spacer');
+
+    // Disable flex spacer temporarily during measurement to get natural content height
+    if (flexSpacer) flexSpacer.style.display = 'none';
 
     const getBottomY = () => footerLayoutEl.getBoundingClientRect().bottom;
-    const getPageBottomLimit = () => page1.getBoundingClientRect().bottom - 76; // 40px footer bar height + ~36px (approx 1cm) gap buffer
+    const getPageBottomLimit = () => page1.getBoundingClientRect().bottom - 42; // 35px bottom padding + 7px safe buffer
 
-    let step = 0;
-    while (getBottomY() > getPageBottomLimit() && step < 4) {
-      step++;
-      if (step === 1) {
-        // Step 1: Shrink item images width to 70px (height auto scales down to preserve aspect ratio)
-        imgElements.forEach(img => {
-          img.style.width = '70px';
-          img.style.height = 'auto';
-        });
-      } else if (step === 2) {
-        // Step 2: Shrink item images width further to 50px, and shrink cell padding
-        imgElements.forEach(img => {
-          img.style.width = '50px';
-          img.style.height = 'auto';
-        });
-        tableCells.forEach(cell => cell.style.padding = '3px 8px');
-      } else if (step === 3) {
-        // Step 3: Shrink observations min-height and spacings
-        if (obsEl) obsEl.style.minHeight = '30px';
-        if (titleRowEl) titleRowEl.style.marginBottom = '4px';
-        if (metaTableEl) metaTableEl.style.marginBottom = '4px';
-        if (footerLayoutEl) {
-          footerLayoutEl.style.marginTop = '4px';
-          footerLayoutEl.style.marginBottom = '4px';
-        }
-      } else if (step === 4) {
-        // Step 4: Shrink font size slightly
-        page1.style.fontSize = '12px';
-        const itemTexts = page1.querySelectorAll('.pdf-item-text');
-        itemTexts.forEach(txt => txt.style.fontSize = '11px');
+    let imageWidth = 90;
+    let paddingY = 5;
+    let paddingX = 10;
+    let mainFontSize = 13;
+    let itemFontSize = 13;
+    let obsMinHeight = 40;
+    let obsPadding = 10;
+    let signatureHeight = 50;
+    let bannerMarginBottom = 10;
+    let titleMarginBottom = 8;
+    let metaMarginBottom = 8;
+    let introMarginBottom = 8;
+    let footerLayoutMarginTop = 6;
+    let footerLayoutMarginBottom = 6;
+
+    let iterations = 0;
+    const maxIterations = 20;
+
+    while (getBottomY() > getPageBottomLimit() && iterations < maxIterations) {
+      iterations++;
+      
+      if (iterations === 1) {
+        imageWidth = 75;
+        paddingY = 4;
+        paddingX = 8;
+        bannerMarginBottom = 4;
+        titleMarginBottom = 4;
+        metaMarginBottom = 4;
+        introMarginBottom = 4;
+      } else if (iterations === 2) {
+        imageWidth = 60;
+        paddingY = 3;
+        paddingX = 6;
+        mainFontSize = 12;
+        itemFontSize = 11.5;
+        obsMinHeight = 30;
+        obsPadding = 6;
+      } else if (iterations === 3) {
+        imageWidth = 45;
+        paddingY = 2;
+        paddingX = 4;
+        mainFontSize = 11.5;
+        itemFontSize = 10.5;
+        signatureHeight = 40;
+        footerLayoutMarginTop = 2;
+        footerLayoutMarginBottom = 2;
+      } else if (iterations === 4) {
+        imageWidth = 35;
+        paddingY = 1.5;
+        paddingX = 3;
+        mainFontSize = 11;
+        itemFontSize = 9.5;
+        obsMinHeight = 20;
+        obsPadding = 4;
+        signatureHeight = 30;
+      } else {
+        // Progressive extreme shrinking for many items
+        imageWidth = Math.max(20, imageWidth - 2);
+        paddingY = Math.max(0.5, paddingY - 0.2);
+        paddingX = Math.max(1, paddingX - 0.5);
+        mainFontSize = Math.max(9.5, mainFontSize - 0.2);
+        itemFontSize = Math.max(8.5, itemFontSize - 0.2);
+        obsMinHeight = Math.max(10, obsMinHeight - 2);
+        signatureHeight = Math.max(20, signatureHeight - 2);
       }
+
+      // Apply styling updates to DOM
+      imgElements.forEach(img => {
+        img.style.width = `${imageWidth}px`;
+        img.style.height = 'auto';
+      });
+      tableCells.forEach(cell => {
+        cell.style.padding = `${paddingY}px ${paddingX}px`;
+      });
+      page1.style.fontSize = `${mainFontSize}px`;
+      const itemTexts = page1.querySelectorAll('.pdf-item-text');
+      itemTexts.forEach(txt => txt.style.fontSize = `${itemFontSize}px`);
+      
+      if (obsEl) {
+        obsEl.style.minHeight = `${obsMinHeight}px`;
+        obsEl.style.padding = `${obsPadding}px`;
+      }
+      if (titleRowEl) titleRowEl.style.marginBottom = `${titleMarginBottom}px`;
+      if (metaTableEl) metaTableEl.style.marginBottom = `${metaMarginBottom}px`;
+      if (headerBannerEl) headerBannerEl.style.marginBottom = `${bannerMarginBottom}px`;
+      if (introTextEl) introTextEl.style.marginBottom = `${introMarginBottom}px`;
+      if (footerLayoutEl) {
+        footerLayoutEl.style.marginTop = `${footerLayoutMarginTop}px`;
+        footerLayoutEl.style.marginBottom = `${footerLayoutMarginBottom}px`;
+      }
+      if (stampEl) stampEl.style.height = `${signatureHeight}px`;
+
       await sleep(25); // Let DOM reflow/update layout
     }
+
+    // Restore spacer before capturing to push the footer layout down to the bottom
+    if (flexSpacer) flexSpacer.style.display = '';
+    await sleep(25); // Let DOM reflow/update layout with spacer restored
 
     // Capture exactly PAGE_W × PAGE_H pixels
     const canvas = await html2canvas(page1, {
@@ -1068,13 +1126,19 @@ async function generatePDF(quote) {
       img.style.height = '';
     });
     tableCells.forEach(cell => cell.style.padding = '');
-    if (obsEl) obsEl.style.minHeight = '';
+    if (obsEl) {
+      obsEl.style.minHeight = '';
+      obsEl.style.padding = '';
+    }
     if (titleRowEl) titleRowEl.style.marginBottom = '';
     if (metaTableEl) metaTableEl.style.marginBottom = '';
+    if (headerBannerEl) headerBannerEl.style.marginBottom = '';
+    if (introTextEl) introTextEl.style.marginBottom = '';
     if (footerLayoutEl) {
       footerLayoutEl.style.marginTop = '';
       footerLayoutEl.style.marginBottom = '';
     }
+    if (stampEl) stampEl.style.height = '';
     page1.style.fontSize = '';
     const itemTexts = page1.querySelectorAll('.pdf-item-text');
     itemTexts.forEach(txt => txt.style.fontSize = '');
