@@ -335,6 +335,9 @@ async function deleteQuoteAsync(id) {
 
 // 1. Get next consecutivo
 app.get('/api/consecutivo', async (req, res) => {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
   const next = await getNextConsecutivoAsync();
   res.json({ next });
 });
@@ -355,6 +358,9 @@ app.post('/api/consecutivo', async (req, res) => {
 
 // 3. Get all quotes / search quotes
 app.get('/api/quotes', async (req, res) => {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
   const { q } = req.query;
   const filtered = await getQuotesAsync(q);
   res.json(filtered);

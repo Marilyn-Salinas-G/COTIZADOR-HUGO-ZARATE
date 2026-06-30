@@ -67,6 +67,7 @@ function switchTab(tab) {
   if (tab === 'new') {
     document.getElementById('tab-new').classList.add('active');
     document.getElementById('tab-new-btn').classList.add('active');
+    fetchConsecutivo(); // Refresh consecutive number when switching to new quote tab
   } else {
     document.getElementById('tab-history').classList.add('active');
     document.getElementById('tab-history-btn').classList.add('active');
@@ -76,7 +77,7 @@ function switchTab(tab) {
 
 // Fetch Next Consecutive Number
 function fetchConsecutivo() {
-  fetch('/api/consecutivo')
+  fetch('/api/consecutivo?t=' + Date.now())
     .then(res => res.json())
     .then(data => {
       consecutivoNext = data.next;
@@ -89,7 +90,7 @@ function fetchConsecutivo() {
 
 // Fetch Quotes History
 function fetchQuotesHistory() {
-  fetch('/api/quotes')
+  fetch('/api/quotes?t=' + Date.now())
     .then(res => res.json())
     .then(data => {
       quotesList = data;
@@ -146,7 +147,7 @@ function filterQuotes() {
     return;
   }
   
-  fetch(`/api/quotes?q=${encodeURIComponent(searchInput)}`)
+  fetch(`/api/quotes?q=${encodeURIComponent(searchInput)}&t=${Date.now()}`)
     .then(res => res.json())
     .then(data => {
       renderHistoryTable(data);
