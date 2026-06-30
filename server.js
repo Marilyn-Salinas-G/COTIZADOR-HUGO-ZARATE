@@ -11,6 +11,18 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Database connection middleware for serverless environment
+app.use(async (req, res, next) => {
+  if (MONGODB_URI && !db && useMongo) {
+    try {
+      await initDb();
+    } catch (err) {
+      console.error("Database connection middleware error:", err);
+    }
+  }
+  next();
+});
+
 // Paths
 const DATA_DIR = __dirname;
 const QUOTES_FILE = path.join(DATA_DIR, 'quotes.json');
@@ -108,38 +120,54 @@ if (MONGODB_URI) {
   }
 }
 
+let connectingPromise = null;
+
 async function initDb() {
-  if (useMongo && client) {
-    try {
-      await client.connect();
-      // Use database specified in URI or default to 'cotizador'
-      db = client.db();
-      console.log("[DATABASE] Conectado exitosamente a MongoDB Atlas.");
-      
-      // Auto-migrate quotes if database collection is empty
-      const quotesColl = db.collection('quotes');
-      const count = await quotesColl.countDocuments();
-      if (count === 0) {
-        console.log("[DATABASE] Colección 'quotes' vacía. Migrando datos locales...");
-        const localQuotes = getQuotes();
-        if (localQuotes.length > 0) {
-          await quotesColl.insertMany(localQuotes);
-          console.log(`[DATABASE] Se importaron ${localQuotes.length} cotizaciones locales a MongoDB.`);
+  if (db) return;
+  if (connectingPromise) {
+    return connectingPromise;
+  }
+  
+  connectingPromise = (async () => {
+    if (useMongo && client) {
+      try {
+        await client.connect();
+        // Use database specified in URI or default to 'cotizador'
+        db = client.db();
+        console.log("[DATABASE] Conectado exitosamente a MongoDB Atlas.");
+        
+        // Auto-migrate quotes if database collection is empty
+        const quotesColl = db.collection('quotes');
+        const count = await quotesColl.countDocuments();
+        if (count === 0) {
+          console.log("[DATABASE] Colección 'quotes' vacía. Migrando datos locales...");
+          const localQuotes = getQuotes();
+          if (localQuotes.length > 0) {
+            await quotesColl.insertMany(localQuotes);
+            console.log(`[DATABASE] Se importaron ${localQuotes.length} cotizaciones locales a MongoDB.`);
+          }
         }
+        
+        // Auto-migrate consecutivo if empty
+        const configColl = db.collection('config');
+        const nextDoc = await configColl.findOne({ _id: 'consecutivo' });
+        if (!nextDoc) {
+          console.log("[DATABASE] Inicializando consecutivo en MongoDB...");
+          const localNext = getNextConsecutivo();
+          await configColl.insertOne({ _id: 'consecutivo', next: localNext });
+        }
+      } catch (err) {
+        console.error("[DATABASE] Fallo al conectar a MongoDB. Usando almacenamiento local JSON:", err);
+        useMongo = false;
+        throw err;
       }
-      
-      // Auto-migrate consecutivo if empty
-      const configColl = db.collection('config');
-      const nextDoc = await configColl.findOne({ _id: 'consecutivo' });
-      if (!nextDoc) {
-        console.log("[DATABASE] Inicializando consecutivo en MongoDB...");
-        const localNext = getNextConsecutivo();
-        await configColl.insertOne({ _id: 'consecutivo', next: localNext });
-      }
-    } catch (err) {
-      console.error("[DATABASE] Fallo al conectar a MongoDB. Usando almacenamiento local JSON:", err);
-      useMongo = false;
     }
+  })();
+  
+  try {
+    await connectingPromise;
+  } finally {
+    connectingPromise = null;
   }
 }
 
