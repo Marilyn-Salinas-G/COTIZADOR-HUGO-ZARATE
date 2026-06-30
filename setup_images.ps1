@@ -3,7 +3,10 @@
 
 [Reflection.Assembly]::LoadWithPartialName("System.Drawing") | Out-Null
 
-$workspaceDir = "d:\Usuarios\Desktop\AGENTE COTIZADOR"
+$workspaceDir = $PSScriptRoot
+if ([string]::IsNullOrEmpty($workspaceDir)) {
+    $workspaceDir = Get-Location
+}
 $publicDir = "$workspaceDir\public"
 $uploadsDir = "$publicDir\uploads"
 
