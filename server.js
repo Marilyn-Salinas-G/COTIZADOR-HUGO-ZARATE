@@ -249,7 +249,7 @@ async function getQuotesAsync(queryStr = null) {
 async function createQuoteAsync(quote) {
   const nextNum = await incrementConsecutivoAsync();
   if (!nextNum) {
-    return null;
+    throw new Error("No se pudo obtener o incrementar el consecutivo");
   }
   
   quote.number = nextNum;
@@ -262,7 +262,7 @@ async function createQuoteAsync(quote) {
       return quote;
     } catch (err) {
       console.error("Error guardando cotización en MongoDB:", err);
-      return null;
+      throw err;
     }
   }
   
@@ -272,7 +272,7 @@ async function createQuoteAsync(quote) {
   if (saveQuotes(quotes)) {
     return quote;
   }
-  return null;
+  throw new Error("Error al escribir la cotización localmente");
 }
 
 async function updateQuoteAsync(id, updatedQuote) {
@@ -374,11 +374,15 @@ app.post('/api/quotes', async (req, res) => {
     return res.status(400).json({ error: 'Datos de cotización incompletos o inválidos' });
   }
   
-  const created = await createQuoteAsync(quote);
-  if (created) {
-    res.json({ success: true, quote: created });
-  } else {
-    res.status(500).json({ error: 'Error al guardar la cotización' });
+  try {
+    const created = await createQuoteAsync(quote);
+    if (created) {
+      res.json({ success: true, quote: created });
+    } else {
+      res.status(500).json({ error: 'Error al guardar la cotización: No se pudo crear.' });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
