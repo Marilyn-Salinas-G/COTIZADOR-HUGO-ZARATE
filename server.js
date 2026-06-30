@@ -338,8 +338,16 @@ app.get('/api/consecutivo', async (req, res) => {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
   res.setHeader('Pragma', 'no-cache');
   res.setHeader('Expires', '0');
+  
+  const debugInfo = {
+    useMongo: useMongo,
+    hasMongoUri: !!process.env.MONGODB_URI,
+    hasDb: !!db,
+    mongoUriLength: process.env.MONGODB_URI ? process.env.MONGODB_URI.length : 0
+  };
+  
   const next = await getNextConsecutivoAsync();
-  res.json({ next });
+  res.json({ next, debug: debugInfo });
 });
 
 // 2. Set next consecutivo manually if needed (admin/utility)
