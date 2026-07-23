@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cotizador-v1';
+const CACHE_NAME = 'cotizador-v2';
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
@@ -7,6 +7,7 @@ const PRECACHE_ASSETS = [
   '/pwa.js',
   '/manifest.json',
   '/logo.png',
+  '/logo_pwa.png',
   '/header_banner.png'
 ];
 
