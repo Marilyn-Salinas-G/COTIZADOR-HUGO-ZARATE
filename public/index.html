@@ -3,6 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- PWA Manifest & Meta Tags -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f97316">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="CotizadorHZ">
+  <link rel="apple-touch-icon" href="logo.png">
+  
   <title>Cotizador - Hugo Zárate Publicidad</title>
   <!-- Google Fonts: Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,6 +45,10 @@
         <button class="nav-btn" id="tab-history-btn" onclick="switchTab('history')">
           <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
           Historial / Buscar
+        </button>
+        <button class="nav-btn hidden" id="pwa-install-btn" style="background-color: var(--success-color); color: var(--text-white); border-color: var(--success-color);">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          Instalar App
         </button>
       </nav>
     </header>
@@ -434,7 +446,39 @@
   </div>
   </div>
 
-  <!-- JS App Script -->
+  <!-- Modal de instrucciones de instalación para iOS (iPhone/iPad) -->
+  <div id="ios-install-modal" class="ios-modal hidden">
+    <div class="ios-modal-content">
+      <span class="ios-modal-close" onclick="closeIosModal()">&times;</span>
+      <div class="ios-modal-header">
+        <img src="logo.png" alt="Logo" class="ios-modal-logo">
+        <h3>Instalar en tu iPhone / iPad</h3>
+      </div>
+      <div class="ios-modal-body">
+        <p>Sigue estos sencillos pasos para agregar el Cotizador a tu pantalla de inicio y usarlo como una aplicación:</p>
+        <ol class="ios-steps">
+          <li>
+            <span>1. Toca el botón de <strong>Compartir</strong> en la barra inferior de Safari:</span>
+            <div class="ios-icon-share">
+              <svg viewBox="0 0 50 50" class="ios-svg-icon" style="width: 24px; height: 24px; color: #3b82f6;"><path d="M25 4v26M14 15l11-11 11 11M6 24v20h38V24" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </li>
+          <li>
+            <span>2. Desplázate hacia abajo en las opciones y selecciona <strong>"Agregar al inicio"</strong> o <strong>"Add to Home Screen"</strong>:</span>
+            <div class="ios-icon-add">
+              <svg viewBox="0 0 50 50" class="ios-svg-icon" style="width: 24px; height: 24px; color: #3b82f6;"><rect x="4" y="4" width="42" height="42" rx="10" stroke="currentColor" stroke-width="4" fill="none"/><path d="M25 14v22M14 25h22" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
+            </div>
+          </li>
+          <li>
+            <span>3. Toca <strong>"Agregar"</strong> (o <strong>"Add"</strong>) en la esquina superior derecha.</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS App Scripts -->
   <script src="app.js"></script>
+  <script src="pwa.js"></script>
 </body>
 </html>
